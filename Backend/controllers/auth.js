@@ -28,8 +28,12 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: 'Invalid JSON format in skills, socialLinks, experience, or education' });
     }
 
-    const avatar = req.files && req.files.avatar && req.files.avatar[0] ? `/Uploads/${req.files.avatar[0].filename}` : null;
-    const resume = req.files && req.files.resume && req.files.resume[0] ? `/Uploads/${req.files.resume[0].filename}` : null;
+    // const avatar = req.files && req.files.avatar && req.files.avatar[0] ? `/Uploads/${req.files.avatar[0].filename}` : null;
+    // const resume = req.files && req.files.resume && req.files.resume[0] ? `/Uploads/${req.files.resume[0].filename}` : null;
+    
+    const avatar = req.files?.avatar?.[0]?.path || req.files?.avatar?.[0]?.location || null;
+    const resume = req.files?.resume?.[0]?.path || req.files?.resume?.[0]?.location || null;
+    
     console.log('Avatar path:', avatar);
     console.log('Resume path:', resume);
 
